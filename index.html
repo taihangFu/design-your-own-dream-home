@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f2efe9" />
+  <title>Roomplay Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#"><span class="brand-mark">R</span><span>roomplay</span></a>
+      <div class="project-title"><span class="eyebrow">CURRENT SPACE</span><input id="projectName" aria-label="Project name" /></div>
+      <div class="top-actions">
+        <span id="saveState" class="save-state"><span></span> Saved</span>
+        <button id="undoBtn" class="icon-btn" title="Undo">↶</button><button id="redoBtn" class="icon-btn" title="Redo">↷</button>
+        <button id="shareBtn" class="share-btn">Share design <span>↗</span></button>
+      </div>
+    </header>
+    <aside class="sidebar">
+      <nav class="primary-nav" aria-label="Editor tools">
+        <button class="nav-item active" data-panel="furniture"><span>▦</span>Furniture</button>
+        <button class="nav-item" data-panel="surfaces"><span>◫</span>Surfaces</button>
+        <button class="nav-item" data-panel="layout"><span>⌗</span>Layout</button>
+      </nav>
+      <div id="furniturePanel" class="panel">
+        <div class="panel-heading"><div><span class="eyebrow">ADD TO ROOM</span><h2>Furniture</h2></div><span class="count">06</span></div>
+        <label class="search"><span>⌕</span><input id="search" placeholder="Search collection" /></label>
+        <div id="catalog" class="catalog"></div>
+        <p class="tip"><span>i</span> Click an item to add it to the room, then drag it into place.</p>
+      </div>
+      <div id="surfacesPanel" class="panel hidden">
+        <div class="panel-heading"><div><span class="eyebrow">SET THE MOOD</span><h2>Surfaces</h2></div></div>
+        <h3>Wall color</h3><div id="wallSwatches" class="swatches"></div>
+        <h3>Floor finish</h3><div id="floorSwatches" class="swatches"></div>
+      </div>
+      <div id="layoutPanel" class="panel hidden">
+        <div class="panel-heading"><div><span class="eyebrow">ROOM SHELL</span><h2>Layout</h2></div></div>
+        <p class="help-copy">This prototype starts with a flexible 8 × 5.5 m room. Drag furniture in 2D for precise placement.</p>
+        <button id="resetBtn" class="wide-btn">Reset demo room</button>
+      </div>
+    </aside>
+    <main class="workspace">
+      <div class="viewbar"><div class="segmented"><button data-view="2d">2D plan</button><button class="active" data-view="3d">3D room</button></div><span class="room-size">8.0 × 5.5 m <i></i> 44 m²</span></div>
+      <div class="canvas-wrap"><canvas id="roomCanvas"></canvas><div id="emptyHint" class="empty-hint hidden">Select furniture from the left to start styling.</div></div>
+      <div class="zoom-control"><button id="zoomOut">−</button><span id="zoomLabel">100%</span><button id="zoomIn">+</button></div>
+      <div class="statusbar"><span><i class="green"></i> Live preview</span><span>Drag objects to move</span><span>Room height 2.7 m</span></div>
+    </main>
+    <aside id="inspector" class="inspector">
+      <div id="noSelection" class="no-selection"><span>◇</span><h3>Select an object</h3><p>Choose furniture in the room to edit it.</p></div>
+      <div id="selectionEditor" class="hidden">
+        <span class="eyebrow">SELECTED OBJECT</span><div class="selected-heading"><h2 id="selectedName"></h2><button id="deleteBtn" class="delete-btn">×</button></div>
+        <label>Rotation <output id="rotationValue">0°</output><input id="rotation" type="range" min="0" max="315" step="45" /></label>
+        <label>Color</label><div id="itemSwatches" class="swatches"></div>
+        <div class="dimensions"><div><span>WIDTH</span><strong id="itemWidth"></strong></div><div><span>DEPTH</span><strong id="itemDepth"></strong></div></div>
+        <button id="duplicateBtn" class="wide-btn">Duplicate item</button>
+      </div>
+    </aside>
+  </div>
+  <div id="toast" class="toast">Share link copied</div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
