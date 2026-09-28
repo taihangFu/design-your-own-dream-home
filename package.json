@@ -1,0 +1,11 @@
+{
+  "name": "roomplay-studio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "test": "node --test",
+    "check": "node --check app.js && node --check project.js && node --check server.js"
+  }
+}
