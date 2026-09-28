@@ -53,3 +53,15 @@ npm run check
 ## MVP limitations and next steps
 
 The starter room shell is fixed. A production follow-up should add wall-drawing tools, doors and windows, calibrated floor-plan image upload, user accounts, server-side project storage, and optimized GLB furniture in a WebGL scene. Floor-plan recognition should begin as editable suggestions rather than a fully automatic promise.
+
+## Publish a permanent preview with GitHub Pages
+
+This repository includes `.github/workflows/deploy-pages.yml`, which publishes the static app without a build step.
+
+1. Push this repository to GitHub.
+2. In the GitHub repository, open **Settings → Pages**.
+3. Under **Build and deployment → Source**, select **GitHub Actions**.
+4. Open the **Actions** tab and run **Deploy Roomplay to GitHub Pages**, or push to `main`/`work`.
+5. The deployment job displays the permanent URL, normally `https://<account>.github.io/<repository>/`.
+
+The workflow cannot deploy until this local repository has a GitHub remote and the current environment is authenticated to that GitHub account.
