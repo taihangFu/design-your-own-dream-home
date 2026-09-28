@@ -40,7 +40,24 @@
       </div>
       <div id="layoutPanel" class="panel hidden">
         <div class="panel-heading"><div><span class="eyebrow">ROOM SHELL</span><h2>Layout</h2></div></div>
-        <p class="help-copy">This prototype starts with a flexible 8 × 5.5 m room. Drag furniture in 2D for precise placement.</p>
+        <button id="drawWallBtn" class="tool-btn">⌁ Draw wall</button>
+        <p id="toolHelp" class="help-copy">Draw, select, and edit walls in the 2D plan. Endpoints snap to the grid and nearby walls.</p>
+        <section class="floor-plan-controls">
+          <h3>Tracing background</h3>
+          <input id="floorPlanInput" type="file" accept="image/png,image/jpeg" hidden />
+          <button id="uploadPlanBtn" class="wide-btn light">Upload floor plan</button>
+          <p class="file-note">PNG or JPEG · stored only in this browser</p>
+          <div id="planSettings" class="hidden">
+            <div class="plan-actions"><button id="replacePlanBtn">Replace</button><button id="togglePlanBtn">Hide</button><button id="deletePlanBtn">Delete</button></div>
+            <label class="range-label">Opacity <output id="opacityValue">42%</output><input id="planOpacity" type="range" min="5" max="100" value="42" /></label>
+            <label class="range-label">Rotation <output id="planRotationValue">0°</output><input id="planRotation" type="range" min="-180" max="180" value="0" /></label>
+            <label class="range-label">Image size <output id="planScaleValue">100%</output><input id="planScale" type="range" min="20" max="300" value="100" /></label>
+            <button id="movePlanBtn" class="tool-btn secondary">✥ Move image</button>
+            <button id="calibrateBtn" class="tool-btn secondary">↔ Calibrate scale</button>
+            <p id="calibrationResult" class="calibration-result"></p>
+          </div>
+          <p id="planError" class="error-message" role="alert"></p>
+        </section>
         <button id="resetBtn" class="wide-btn">Reset demo room</button>
       </div>
     </aside>
@@ -48,7 +65,7 @@
       <div class="viewbar"><div class="segmented"><button data-view="2d">2D plan</button><button class="active" data-view="3d">3D room</button></div><span class="room-size">8.0 × 5.5 m <i></i> 44 m²</span></div>
       <div class="canvas-wrap"><canvas id="roomCanvas"></canvas><div id="emptyHint" class="empty-hint hidden">Select furniture from the left to start styling.</div></div>
       <div class="zoom-control"><button id="zoomOut">−</button><span id="zoomLabel">100%</span><button id="zoomIn">+</button></div>
-      <div class="statusbar"><span><i class="green"></i> Live preview</span><span>Drag objects to move</span><span>Room height 2.7 m</span></div>
+      <div class="statusbar"><span><i class="green"></i> Live preview</span><span id="interactionStatus">Drag objects to move</span><span id="heightStatus">Room height 2.7 m</span></div>
     </main>
     <aside id="inspector" class="inspector">
       <div id="noSelection" class="no-selection"><span>◇</span><h3>Select an object</h3><p>Choose furniture in the room to edit it.</p></div>
@@ -58,6 +75,12 @@
         <label>Color</label><div id="itemSwatches" class="swatches"></div>
         <div class="dimensions"><div><span>WIDTH</span><strong id="itemWidth"></strong></div><div><span>DEPTH</span><strong id="itemDepth"></strong></div></div>
         <button id="duplicateBtn" class="wide-btn">Duplicate item</button>
+      </div>
+      <div id="wallEditor" class="hidden">
+        <span class="eyebrow">SELECTED WALL</span><div class="selected-heading"><h2>Wall</h2><button id="deleteWallBtn" class="delete-btn">×</button></div>
+        <label>Length <output id="wallLength"></output></label>
+        <label>Thickness <output id="wallThicknessValue"></output><input id="wallThickness" type="range" min="0.05" max="0.5" step="0.01" /></label>
+        <label>Height <output id="wallHeightValue"></output><input id="wallHeight" type="range" min="1" max="5" step="0.1" /></label>
       </div>
     </aside>
   </div>
