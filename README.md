@@ -39,6 +39,8 @@ npm run check
 ## Prototype features
 
 - Switch between an isometric 3D room and measured 2D plan
+- Draw, select, reshape, and delete dimensioned walls with grid/endpoint snapping
+- Upload a private PNG/JPEG tracing background, position it, and calibrate it from a known measurement
 - Add six types of furniture from a searchable catalog
 - Select, drag, rotate, duplicate, recolor, and delete furniture
 - Recolor walls and flooring
@@ -48,11 +50,11 @@ npm run check
 
 ## Architecture
 
-`project.js` contains the engine-independent project model and immutable furniture operations. `app.js` owns editor state, history, persistence, input, and canvas rendering. The UI intentionally uses native browser APIs, so this prototype installs and runs without third-party dependencies.
+`project.js` contains the engine-independent project model, geometry helpers, migrations, and immutable furniture/wall operations. `app.js` owns editor state, history, input, dynamic 2D/isometric rendering, and persistence. Structured project data is kept in `localStorage`; the potentially much larger floor-plan image blob is kept in IndexedDB and never uploaded. The UI intentionally uses native browser APIs, so this prototype installs and runs without third-party dependencies.
 
 ## MVP limitations and next steps
 
-The starter room shell is fixed. A production follow-up should add wall-drawing tools, doors and windows, calibrated floor-plan image upload, user accounts, server-side project storage, and optimized GLB furniture in a WebGL scene. Floor-plan recognition should begin as editable suggestions rather than a fully automatic promise.
+A production follow-up should add doors and windows, PDF floor-plan import, user accounts, optional server-side project storage, and optimized GLB furniture in a WebGL scene. Floor-plan recognition should begin as editable suggestions rather than a fully automatic promise.
 
 ## Publish a permanent preview with GitHub Pages
 
